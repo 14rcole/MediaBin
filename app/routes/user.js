@@ -24,7 +24,7 @@ exports.createUser = function (req, res) {
 
 // GET
 exports.getUser =  function (req, res) {
-    User.findOne ({ 'username': req.params.username }, function (err, user) {
+    User.findOne ({ 'name': req.params.username }, function (err, user) {
         if (err) {
             console.log("Error retrieving user: " + err);
             res.send("Error retrieving user");
