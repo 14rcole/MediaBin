@@ -23,11 +23,16 @@ var file = require('./app/models/file');
 
 // routes ======================================================================
 var userRoutes = require('./app/routes/user');
-//var fileRoutes = require('./app/routes/file');
+var fileRoutes = require('./app/routes/file');
 
 // register routes ============================================================
-//app.use('/user', userRoutes);
-//app.use('/file', fileRoutes);
+app.post('/user/new', userRoutes.createUser);
+app.get('/user/:username', userRoutes.getUser);
+app.put('/user/:id/edit', userRoutes.updateUser);
+app.delete('/home/:id', userRoutes.deleteUser);
+
+app.post('/file/upload', fileRoutes.postFile);
+app.get('/file/fprintmatch', fileRoutes.matchFprint);
 
 // listen (start app with node server.js) ======================================
 app.listen(port);

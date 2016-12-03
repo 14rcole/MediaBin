@@ -14,7 +14,6 @@ userFileSchema = new mongoose.Schema({
 
 // define our user schema
 userSchema = new mongoose.Schema({
-    _id: mongoose.Schema.Types.ObjectId,
     name: { type: String, default: '' },
     username: String,
     email: String,
