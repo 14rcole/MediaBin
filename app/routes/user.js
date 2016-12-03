@@ -16,7 +16,7 @@ exports.createUser = function (req, res) {
             console.log("error creating new user: " + err);
             res.send("Error creating new user");
         } else {
-            console.log("POST creating new user: " + user.name);
+            console.log("POST creating new user: " + user._id);
             res.json(user);
         }
     });
@@ -24,13 +24,18 @@ exports.createUser = function (req, res) {
 
 // GET
 exports.getUser =  function (req, res) {
-    User.findOne ({ 'username': req.params.username }, function (err, user) {
+    User.findOne ({ 'name': req.params.username }, function (err, user) {
         if (err) {
             console.log("Error retrieving user: " + err);
             res.send("Error retrieving user");
         } else {
-            console.log("GET user with ID: " + user._id);
-            res.json(user);
+            if (user) {
+                console.log("GET user with ID: " + user._id);
+                res.json(user);
+            } else {
+                console.log("NO USER");
+                res.send("Error: cannot find user by that name");
+            }
         }
     });
 };

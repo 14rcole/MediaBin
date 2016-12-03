@@ -13,12 +13,12 @@ mongoose.connect(database.url); 	// connect to mongoDB database on modulus.io
 
 app.all('/', function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "X-Requested-Within");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-Within, Content-Type, Accept");
 });
 
 app.use(express.static(__dirname + '/public')); // set the static files location /public/img will be /img for users
-app.use(bodyParser.urlencoded({'extended':'true'})); // parse application/x-www-form-urlencoded
-app.use(bodyParser.json()); // parse application/json
+app.use(bodyParser.urlencoded({'extended':'true', limit: '5mb' })); // parse application/x-www-form-urlencoded
+app.use(bodyParser.json({ limit: '5mb' })); // parse application/json
 app.use(bodyParser.json({ type: 'application/vnd.api+json' })); // parse application/vnd.api+json as json
 app.use(methodOverride('X-HTTP-Method-Override')); // override with the X-HTTP-Method-Override header in the request
 
@@ -47,8 +47,7 @@ app.get('/user/:username', userRoutes.getUser);
 app.put('/user/edit/:id', userRoutes.updateUser);
 app.delete('/user/delete/:id', userRoutes.deleteUser);
 
-app.post('/file/upload', upload.fields([{name: 'fingerprint', maxCount: 1 }, { name: 'mediaFile', maxCount: 1 }]), fileRoutes.postFile);
-app.get('/file/fprintmatch', upload.single('fingerprint'), fileRoutes.matchFprint);
+app.post('/file/upload', upload.single('file'), fileRoutes.postFile);
 app.get('/file/get/:uid/:filename', fileRoutes.getFile);
 app.get('/file/download/:uid/:fileid', fileRoutes.downloadFile);
 app.delete('/file/delete/:uid/:fileid', fileRoutes.deleteFile);
