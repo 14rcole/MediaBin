@@ -64,7 +64,7 @@ h2 {
 }
 
 #fileheader h2 {
-    padding-right: 165px;
+    width: 400px;
 }
 
 #fileheader img {
@@ -116,4 +116,9 @@ input[type=text] {
 
 .size {
     width: 100px;
+}
+
+#uploadbutton {
+    background-color: inherit;
+    border-width: 0px;
 }

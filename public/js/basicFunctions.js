@@ -6,7 +6,7 @@ function dispRegister() {
 }
 
 $(function() {
-	if (localStorage.getItem("user")) {
+	if (localStorage.getItem("username")) {
 		window.location.href = "fileexplorer.html";
 	}
 
@@ -26,9 +26,18 @@ $(function() {
 	    type:   "GET",
 	    url:    url + "/user/" + username,
 	    success: function(data) {
-	    	localStorage.setItem("user", data);
-	    	console.log("success!");
-    		window.location.href = "fileexplorer.html";
+
+	    	if (password === data.password) {
+	    		localStorage.setItem("username", data.name);
+		    	localStorage.setItem("files", data.files);
+		    	localStorage.setItem("password", data.password);
+		    	console.log("success!");
+	    		window.location.href = "fileexplorer.html";
+	    	}
+	    	else {
+	    		$("#pwdLabel").html("Password <span class = \"wrong\">(Incorrect Password)</span>");
+	    	}
+		    	
 	   	}   
 	});
 
@@ -59,7 +68,9 @@ function register() {
 			"password":password
 		},
 	    success: function(data) {
-	    	localStorage.setItem("user", data);
+	    	localStorage.setItem("username", data.name);
+	    	localStorage.setItem("files", data.files);
+	    	localStorage.setItem("password", data.password);
 	    	console.log("success!");
     		window.location.href = "fileexplorer.html";
 	   	}   

@@ -26,6 +26,7 @@ exports.postFile = function (req, res) {
                 if (err) {
                     console.log("error matching fingerprint in database " + error);
                     res.send("error matching fingerprint in database");
+>>>>>>> 2a35496dbc66120fc7a26685cd707eeb001d0f67
                 } else {
                     if (results.contains("NOMATCH")) {
                         // generate File object
