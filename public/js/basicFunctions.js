@@ -1,3 +1,5 @@
+var url = "http://ec2-54-175-174-220.compute-1.amazonaws.com:8080"
+
 function dispRegister() {
    	document.getElementById('id01').style.display='none';
     document.getElementById('id02').style.display='block';
@@ -22,7 +24,7 @@ $(function() {
 						}
 		$.ajax({
 	    type:   "GET",
-	    url:    "http://localhost:8080/user/" + username,
+	    url:    url + "/user/" + username,
 	    success: function(data) {
 	    	localStorage.setItem("user", data);
 	    	console.log("success!");
@@ -50,7 +52,7 @@ function register() {
 
 	$.ajax({
 	    type:   "POST",
-	    url:    "http://localhost:8080/user",
+	    url:    url + "/user",
 	    data:   {
 			"name":username,
 			"email":email,
