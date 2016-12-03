@@ -11,13 +11,13 @@ router.post('/user/new', function (req, res) {
         name: req.body.name,
         email: req.body.email,
         password: req.body.password
-    }, function (req, res) {
+    }, function (err, user) {
         if (err) {
             console.log("error creating new user: " + err);
             res.send("Error creating new user");
         } else {
             console.log("POST creating new user: " + user._id);
-            res.send(user);
+            res.json(user);
         }
     });
 });
@@ -36,7 +36,7 @@ router.get('/user/:username', function (req, res) {
 });
 
 // PUT
-router.put('/:id/edit', function(req, res) {
+router.put('/user/:id/edit', function(req, res) {
     var newUsername = req.body.username;
     var newPassword = req.body.password;
     var newEmail = req.body.email;

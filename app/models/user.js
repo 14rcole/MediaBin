@@ -37,6 +37,23 @@ userSchema.methods.removeFile = function(file_id) {
     }
 }
 
+userSchema.methods.findFileByName = function(filename) {
+    for (var f in this.files) {
+        if (f.name == filename) {
+            return f;
+        }
+    }
+    return null;
+}
+
+userSchema.methods.findFileById = function(file_id) {
+    for (var f in this.files) {
+        if (f.file_id == file_id) {
+            return f;
+        }
+    }
+    return null;
+}
 mongoose.model('User', userSchema);
 
 // module.exports = userSchema;
