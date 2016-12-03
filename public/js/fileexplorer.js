@@ -12,24 +12,16 @@ $(function () {
 	$('#fileheader h2').html(localStorage.getItem("username") + "'s Bin");
 	var files = localStorage.getItem("files");
 	console.log(files);
-	// var numFiles = files.length;
-	// for (var i = 0; i < numFiles; i++) {
-	// 	$('#fileentry').append("
-	// 		<ul>
- //                <li class = \"name\">
- //                    " + files[i].name + "
- //                </li>
- //                <li class = \"date\">
- //                    " + files[i].date"
- //                </li>
- //                <li class = \"size\">
- //                    " + files[i].size +"
- //                </li>
- //            </ul>
- //            "
- //        );
-	// }
+	if (files) {
+		var numFiles = files.length;
+		for (var i = 0; i < numFiles; i++) {
+			$('#files').append("<div class = \"fileentry\"><ul><li class = \"name\">" + files[i].name + "</li><li class = \"date\">" + files[i].date + "</li><li class = \"size\">" + files[i].size +"</li></ul></div>");
+		}
+
+	}
 });
+
+
 
 function uploadFile() {
 
@@ -41,14 +33,22 @@ function uploadFile() {
 
 function loaded(evt) {  
     var data = evt.target.result;
+    var file = $("#Field6").val();
 
 	$.ajax({
 		    type:   "POST",
 		    url:    url + "/file/upload",
-		    data: data,
+		    data: {
+		    	"data":data,
+		    	"filename":file
+		    },
 		    success: function(data) {
 		    	console.log(data);
 		   	}   
 	});
+
+}
+
+function getFile() {
 
 }

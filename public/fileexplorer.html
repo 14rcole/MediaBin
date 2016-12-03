@@ -30,7 +30,7 @@
                 <img src="imgs/fileexplorer/upload.svg" alt="upload" class="avatar">
             </div>
             <div class="container">
-                <input id="Field6" type="file" class="form-control" size="12" tabindex="6" required>
+                <input id="Field6" type="file" class="form-control" size="12" tabindex="6" required accept = "audio/*, video/*">
                 <button type="button" onclick="uploadFile()">Upload</button>
             </div>
             <div class="container cancel">
@@ -87,7 +87,7 @@
                     </form>
 
                 </div>
-                <div class = "fileentry">
+                <div class = "fileentry" fileIndex = -1>
                     <ul>
                         <li class = "name">
                             Name
