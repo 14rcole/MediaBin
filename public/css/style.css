@@ -208,6 +208,10 @@ label {
     font-weight: bold;
 }
 
+label {
+    font-family: inherit;
+}
+
 .wrong {
     color: red;
     font-weight: normal;

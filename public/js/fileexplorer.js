@@ -43,7 +43,9 @@ function loaded(evt) {
 		    	"filename":file
 		    },
 		    success: function(data) {
-		    	console.log(data);
+		    	document.getElementById('id02').style.display='none';
+		    	//$('#files').append("<div class = \"fileentry\"><ul><li class = \"name\">" + data.name + "</li><li class = \"date\">" + data.date + "</li><li class = \"size\">" + data.size +"</li></ul></div>");
+		    	$('#files').append("<div class = \"fileentry\"><ul><li class = \"name\">" + file.substring(12, file.length) + "</li><li class = \"date\"> 12/03/2016</li><li class = \"size\">4.5mb </li></ul></div>");
 		   	}   
 	});
 
