@@ -175,7 +175,11 @@ footer {
     to {transform: scale(1)}
 }
 
-#loginbutton {
+#centerme {
+    margin-left: 370px;
+}
+
+.loginbutton {
     font-size: inherit;
     font-weight: inherit;
     border: none;
@@ -193,4 +197,18 @@ footer {
     text-align: right;
     text-decoration: underline;
 
+}
+.cancel {
+    width: 100px;
+    margin-left: 500px;
+    background-color:#f1f1f1;
+}
+
+label {
+    font-weight: bold;
+}
+
+.wrong {
+    color: red;
+    font-weight: normal;
 }

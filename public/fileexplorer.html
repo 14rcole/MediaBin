@@ -11,14 +11,40 @@
     <link href="css/fileexplorer.css" rel="stylesheet" type="text/css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src = "js/fileexplorer.js" type = "text/jscript"></script>
+    <script>
+        $(function () {
+            if (localStorage.getItem("username")) {
+                $(".homelink").attr("href", "fileexplorer.html");
+            }
+        });
+    </script>
 </head>
 
 <body>
+    <!-- The Modal -->
+    <div id="id02" class="modal">
+        <span onclick="document.getElementById('id02').style.display='none'" class="close" title="Close Modal">×</span>
+        <!-- Modal Content -->
+        <form id="form" class="modal-content animate">
+            <div class="imgcontainer">
+                <img src="imgs/fileexplorer/upload.svg" alt="upload" class="avatar">
+            </div>
+            <div class="container">
+                <input id="Field6" type="file" class="form-control" size="12" tabindex="6" required>
+                <button type="button" onclick="uploadFile()">Upload</button>
+            </div>
+            <div class="container cancel">
+                <button type="button"  onclick="document.getElementById('id02').style.display='none'" class="cancelbtn">Cancel</button>
+            </div>
+        </form>
+    </div>
     <div id = "container">
         <header>
-            <img src = "imgs/logo.png" />
+            <a class = "homelink"><img src = "imgs/logo.png" /></a>
             <ul>
-                <li><a href = "index.html">Home</a></li>
+                <li><a class = "homelink" href = "index.html">Home</a></li>
+		          <li><a href="premium.html">Premium</a></li>
+		          <li><a href="faq.html">FAQ</a></li>
                 <li><a id = "logout" href = "index.html">Logout</a></li>
             </ul>
         </header>
@@ -52,8 +78,8 @@
             </div>
             <div id = "files">
                 <div id = "fileheader">
-                    <h2>Tyler Sudol's Bin</h2>
-                    <img src = "imgs/fileexplorer/upload.svg" />
+                    <h2></h2>
+                    <button id="uploadbutton" onclick="document.getElementById('id02').style.display='block'"><img src = "imgs/fileexplorer/upload.svg" /></button>
                     <img src = "imgs/fileexplorer/share.svg" />
                     <img src = "imgs/fileexplorer/trash.svg" />
                     <form>
@@ -65,9 +91,6 @@
                     <ul>
                         <li class = "name">
                             Name
-                        </li>
-                        <li class = "quality">
-                            Quality
                         </li>
                         <li class = "date">
                             Upload Date
@@ -81,7 +104,7 @@
         </div>
         
         <footer>
-            A Lehigh Hacks project by Ryan Cole, Tyler Sudol, Ken Grenestedt, and another person
+            A Lehigh Hacks project by Ryan Cole, Tyler Sudol, Ken Grenestedt
         </footer>
     
     </div>

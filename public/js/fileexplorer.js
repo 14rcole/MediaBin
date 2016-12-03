@@ -1,12 +1,18 @@
+var url = "http://ec2-54-175-174-220.compute-1.amazonaws.com:8080"
+
+
+
 $(function () {
-	console.log("testestest")
-	$('#logout').append(" (" + localStorage.getItem("user").name + ")");
+	$('#logout').append(" (" + localStorage.getItem("username") + ")");
 	$('#logout').click(function () {
-		localStorage.removeItem("user");
+		localStorage.removeItem("username");
+		localStorage.removeItem("files");
+		localStorage.removeItem("password");
 	});
-	$('#fileheader').append(localStorage.getItem("user").name + "'s Bin");
-	var files = localStorage.getItem("user").files;
-	var numFiles = files.length;
+	$('#fileheader h2').html(localStorage.getItem("username") + "'s Bin");
+	var files = localStorage.getItem("files");
+	console.log(files);
+	// var numFiles = files.length;
 	// for (var i = 0; i < numFiles; i++) {
 	// 	$('#fileentry').append("
 	// 		<ul>
@@ -25,4 +31,24 @@ $(function () {
 	// }
 });
 
+function uploadFile() {
 
+	var reader = new FileReader();
+	reader.readAsDataURL(($("#Field6"))[0].files[0]);
+	reader.onload = loaded;
+
+}
+
+function loaded(evt) {  
+    var data = evt.target.result;
+
+	$.ajax({
+		    type:   "POST",
+		    url:    url + "/file/upload",
+		    data: data,
+		    success: function(data) {
+		    	console.log(data);
+		   	}   
+	});
+
+}
