@@ -1,5 +1,5 @@
 module.exports = {
 
 	// the database url to connect!
-	url: ''
+    url: 'mongodb://localhost:27017'
 }
