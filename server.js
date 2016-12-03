@@ -13,10 +13,10 @@ mongoose.connect(database.url); 	// connect to mongoDB database on modulus.io
 
 app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "X-Requested-Within")'
-}
+    res.header("Access-Control-Allow-Headers", "X-Requested-Within");
+});
 
-app.use(express.static(__dirname + '/public')); 		// set the static files location /public/img will be /img for users
+app.use(express.static(__dirname + '/public')); // set the static files location /public/img will be /img for users
 app.use(bodyParser.urlencoded({'extended':'true'})); // parse application/x-www-form-urlencoded
 app.use(bodyParser.json()); // parse application/json
 app.use(bodyParser.json({ type: 'application/vnd.api+json' })); // parse application/vnd.api+json as json
@@ -42,7 +42,7 @@ var userRoutes = require('./app/routes/user');
 var fileRoutes = require('./app/routes/file');
 
 // register routes ============================================================
-app.post('/user/', userRoutes.createUser);
+app.post('/user', userRoutes.createUser);
 app.get('/user/:username', userRoutes.getUser);
 app.put('/user/edit/:id', userRoutes.updateUser);
 app.delete('/user/delete/:id', userRoutes.deleteUser);
