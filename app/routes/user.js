@@ -29,8 +29,12 @@ exports.getUser =  function (req, res) {
             console.log("Error retrieving user: " + err);
             res.send("Error retrieving user");
         } else {
-            console.log("GET user with ID: " + user.id);
-            res.json(user);
+            if (user) {
+                console.log("GET user with ID: " + user.id);
+                res.json(user);
+            } else {
+                console.log("NO USER");
+                res.send("Error: cannot find user by that name");
         }
     });
 };
