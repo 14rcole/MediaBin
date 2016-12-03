@@ -17,7 +17,7 @@ exports.postFile = function (req, res) {
         var options = {
             args: ['--dbase fpdbase', fingerprintJson.path]
         }
-        python.run('audfprint.py add', options, function (err, results) {
+        python.run('app/audfprint/audfprint.py add', options, function (err, results) {
             if (err) {
                 console.log("error adding fingerprint to database: " + err);
                 res.send("error adding fingerprint to database");
@@ -50,7 +50,7 @@ exports.matchFprint = function (req, res) {
     var options = {
         args: ['--dbase fpdbase', '-- min-count 100', req.file.filename]
     }
-    python.run('audfprint.py match', options, function (err, results) {
+    python.run('app.audfprint/audfprint.py match', options, function (err, results) {
         if (err) {
             console.log("error matching fingerprint in database " + error);
             res.send("error matching fingerprint in database");
@@ -147,7 +147,7 @@ exports.deleteFile = function (req, res) {
                             var options = {
                                 args: ['--dbase fpdbase', filename]
                             }
-                            python.run('audfprint.py remove', options, function (err, results) {
+                            python.run('app/audfprint/audfprint.py remove', options, function (err, results) {
                                 if (err) {
                                     console.log("error removing fingerprint from database: " + err);
                                     res.send("error removing fingerprint from database");
