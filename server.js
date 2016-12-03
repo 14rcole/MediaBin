@@ -13,7 +13,7 @@ mongoose.connect(database.url); 	// connect to mongoDB database on modulus.io
 
 app.all('/', function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "X-Requested-Within");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-Within, Content-Type, Accept");
 });
 
 app.use(express.static(__dirname + '/public')); 		// set the static files location /public/img will be /img for users
