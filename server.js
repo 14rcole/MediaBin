@@ -47,8 +47,7 @@ app.get('/user/:username', userRoutes.getUser);
 app.put('/user/edit/:id', userRoutes.updateUser);
 app.delete('/user/delete/:id', userRoutes.deleteUser);
 
-app.post('/file/upload', upload.fields([{name: 'fingerprint', maxCount: 1 }, { name: 'mediaFile', maxCount: 1 }]), fileRoutes.postFile);
-app.get('/file/fprintmatch', upload.single('fingerprint'), fileRoutes.matchFprint);
+app.post('/file/upload', upload.single('file'), fileRoutes.postFile);
 app.get('/file/get/:uid/:filename', fileRoutes.getFile);
 app.get('/file/download/:uid/:fileid', fileRoutes.downloadFile);
 app.delete('/file/delete/:uid/:fileid', fileRoutes.deleteFile);
