@@ -13,20 +13,19 @@ exports.postFile = function (req, res) {
     var toParse = data.substring(data.indexOf(',')+1);  
     var buf = Buffer.from(toParse, 'base64');
     var basename = req.body.filename.substring(req.body.filename.lastIndexOf("\\")+1);
-    filename = path.join("./uploads/", basename);
+    filename = "./uploads/" + basename;
     fs.writeFile(filename, buf, function(err) {
         if (err) {
             console.log("write file error");
             res.send("upload file error");
         } else {
             var options = {
-                args: ['--dbase fpdbase', '-- min-count 100', filename]
+                args: ['match', '--dbase fpdbase', '-- min-count 100', filename]
             }
-            python.run('app.audfprint/audfprint.py match', options, function (err, results) {
+            python.run('./app/audfprint/audfprint.py', options, function (err, results) {
                 if (err) {
-                    console.log("error matching fingerprint in database " + error);
+                    console.log("error matching fingerprint in database " + err);
                     res.send("error matching fingerprint in database");
->>>>>>> 2a35496dbc66120fc7a26685cd707eeb001d0f67
                 } else {
                     if (results.contains("NOMATCH")) {
                         // generate File object
@@ -49,16 +48,21 @@ exports.postFile = function (req, res) {
                                         res.send("error changing filename");
                                     } else {
                                         options = {
-                                            args: ['--dbase fpdbase', newFilename]
+                                            args: ['add', '--dbase fpdbase', newFilename]
                                         }
-                                        python.run('app/audfprint/audfprint.py add', options, function (err, results) {
+                                        python.run('app/audfprint/audfprint.py', options, function (err, results) {
                                             if (err) {
                                                 console.log("error adding fingerprint to database: " + err);
                                                 res.send("error adding fingerprint to database");
                                             } else {
 
                                                 console.log("POST adding new file " + file._id);
-                                                res.send(file);
+                                                userFile = {
+                                                    file_id: file._id,
+                                                    date: mongoose.Date.now,
+                                                    name: basename
+                                                }
+                                                res.json(userFile);
                                             }
                                         });         
                                     }
@@ -85,6 +89,11 @@ exports.postFile = function (req, res) {
                         });
                         console.log("Found a match! " + result);
                         res.send("MATCH");
+                        userFile = {
+                            file_id: match_id,
+                            date: mongoose.Date.now,
+                            name: basename
+                        }
                     }
                 }
             });
@@ -158,9 +167,9 @@ exports.deleteFile = function (req, res) {
                         if (file.ref_count <= 0) {
                             var filename = file._id + '.afpt';
                             var options = {
-                                args: ['--dbase fpdbase', filename]
+                                args: ['remove', '--dbase fpdbase', filename]
                             }
-                            python.run('app/audfprint/audfprint.py remove', options, function (err, results) {
+                            python.run('app/audfprint/audfprint.py', options, function (err, results) {
                                 if (err) {
                                     console.log("error removing fingerprint from database: " + err);
                                     res.send("error removing fingerprint from database");
