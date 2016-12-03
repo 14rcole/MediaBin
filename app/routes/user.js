@@ -1,29 +1,30 @@
 var express = require('express');
-var router = express.Router();
 var mongoose = require('mongoose');
 var User = mongoose.model('User');
 
 / * CRUD API */
 // POST
-router.post('/user/new', function (req, res) {
+exports.createUser = function (req, res) {
     // Create a new user document
-    User.create({
+    var user = new User({
         name: req.body.name,
         email: req.body.email,
         password: req.body.password
-    }, function (req, res) {
+    });
+    console.log("SOMETHING");
+    user.save(function (err, user) {
         if (err) {
             console.log("error creating new user: " + err);
             res.send("Error creating new user");
         } else {
             console.log("POST creating new user: " + user._id);
-            res.send(user);
+            res.json(user);
         }
     });
-});
+};
 
 // GET
-router.get('/user/:username', function (req, res) {
+exports.getUser =  function (req, res) {
     User.findOne ({ 'username': req.params.username }, function (err, user) {
         if (err) {
             console.log("Error retrieving user: " + err);
@@ -33,10 +34,10 @@ router.get('/user/:username', function (req, res) {
             res.json(user);
         }
     });
-});
+};
 
 // PUT
-router.put('/:id/edit', function(req, res) {
+exports.updateUser = function(req, res) {
     var newUsername = req.body.username;
     var newPassword = req.body.password;
     var newEmail = req.body.email;
@@ -64,10 +65,10 @@ router.put('/:id/edit', function(req, res) {
             });
         }
     });
-});
+};
 
 // DELETE
-router.delete('/user/:id', function (req, res) {
+exports.deleteUser = function (req, res) {
     User.findById(req.params.id, function(err, user) {
         if (err) {
             console.log("Error finding user to delete: " + err);
@@ -84,4 +85,4 @@ router.delete('/user/:id', function (req, res) {
             });
         }
     });
-});
+};
