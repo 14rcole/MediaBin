@@ -35,6 +35,7 @@ exports.getUser =  function (req, res) {
             } else {
                 console.log("NO USER");
                 res.send("Error: cannot find user by that name");
+            }
         }
     });
 };
