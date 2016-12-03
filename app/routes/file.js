@@ -13,7 +13,7 @@ exports.postFile = function (req, res) {
     var toParse = data.substring(data.indexOf(',')+1);  
     var buf = Buffer.from(toParse, 'base64');
     var basename = req.body.filename.substring(req.body.filename.lastIndexOf("\\")+1);
-    filename = path.join("./uploads/", basename);
+    filename = "./uploads/" + basename;
     fs.writeFile(filename, buf, function(err) {
         if (err) {
             console.log("write file error");

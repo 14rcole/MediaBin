@@ -1,4 +1,5 @@
-<html><head>
+<html>
+<head>
     <title>MediaBin</title>
     <script>
         // Get the modal
@@ -34,16 +35,16 @@
             <div class="container">
                 <label><b>Username</b></label>
                 <input type="text" placeholder="Enter Username" name="username" required="">
-                <label><b>Password</b></label>
+                <label id = "pwdLabel">Password</label>
                 <input type="password" placeholder="Enter Password" name="password" required="">
                 <button type="submit">Login</button>
             </div>
-            <div class="container" style="background-color:#f1f1f1">
+            <div class="container cancel" style="background-color:#f1f1f1">
                 <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
             </div>
         </form>
         <div class="container"> 
-            <button id="signupbutton" onclick="dispRegister()">Register</button>
+            <button id="signupbutton" onclick="dispRegister()">No Account? Register Here for Free!</button>
         </div>
     </div>
         
@@ -65,7 +66,7 @@
 			<input id="passwordinput" type="password" placeholder="Enter Password" name="password" required="">
 			<button type="button" onclick="register()">Register</button>
 		</div>
-		<div class="container" style="background-color:#f1f1f1">
+		<div class="container cancel" style="background-color:#f1f1f1">
 			<button type="button" onclick="document.getElementById('id02').style.display='none'" class="cancelbtn">Cancel</button>
 		</div>
 	</form>
@@ -79,25 +80,25 @@
 		<li><a href="faq.html">FAQ</a></li>
 		<li>
 		<!-- Button to open the modal login form -->
-		<button id="loginbutton" onclick="document.getElementById('id01').style.display='block'">Login</button>
+		<button class="loginbutton" onclick="document.getElementById('id01').style.display='block'">Login</button>
 		</li>
 	</ul>
 	</header>
 	<div id="cloudsplash">
 		<h1>Easier Song and Music Storage</h1>
-		<a href="upload.html">
+		<button class="loginbutton" id = "centerme" onclick="document.getElementById('id01').style.display='block'">
 		<div id="uploadbutton">
 			<div>
 				<span class="buttontext">UPLOAD</span>
 				<img src="imgs/uploadicon.png">
 			</div>
 		</div>
-		</a>
+		</button>
 		<h2>
 		Try us now for free to store up to 20 movies and 500 songs </h2>
 	</div>
 	<footer>
-	A Lehigh Hacks project by Ryan Cole, Tyler Sudol, Ken Grenestedt, and another person </footer>
+	A Lehigh Hacks project by Ryan Cole, Tyler Sudol, Ken Grenestedt </footer>
 </div>
 
 </body></html>
