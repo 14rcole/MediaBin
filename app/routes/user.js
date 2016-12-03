@@ -11,7 +11,6 @@ exports.createUser = function (req, res) {
         email: req.body.email,
         password: req.body.password
     });
-    console.log("SOMETHING");
     user.save(function (err, user) {
         if (err) {
             console.log("error creating new user: " + err);
