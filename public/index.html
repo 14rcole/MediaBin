@@ -1,6 +1,4 @@
-<!DOCTYPE HTML>
-<html>
-<head>
+<html><head>
     <title>MediaBin</title>
     <script>
         // Get the modal
@@ -13,38 +11,38 @@
         }
     </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src = "js/basicFunctions.js" type="text/javascript"></script>
+    <script src="js/basicFunctions.js" type="text/javascript"></script>
     <script>
         $( "#login" ).submit(function( event ) {
             alert( "Handler for .submit() called." );
             event.preventDefault();
         });
     </script>
-    <link href="css/style.css" rel="stylesheet" type="text/css"/>
-    <link href="css/index.css" rel="stylesheet" type="text/css"/>
+    <link href="css/style.css" rel="stylesheet" type="text/css">
+    <link href="css/index.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 <!-- The Modal -->
-<div id="id01" class="modal">
-	<span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+<div id="id01" class="modal" style="display: none;">
+	<span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">×</span>
 	<!-- Modal Content -->
-    <div class = "modal-content animate">
-        <form id = "login" action="action_page.php" novalidate>
+    <div class="modal-content animate">
+        <form id="login" action="action_page.php" novalidate="">
             <div class="imgcontainer">
                 <img src="imgs/avatar.svg" alt="Avatar" class="avatar">
             </div>
             <div class="container">
                 <label><b>Username</b></label>
-                <input type="text" placeholder="Enter Username" name="username" required>
+                <input type="text" placeholder="Enter Username" name="username" required="">
                 <label><b>Password</b></label>
-                <input type="password" placeholder="Enter Password" name="password" required>
+                <input type="password" placeholder="Enter Password" name="password" required="">
                 <button type="submit">Login</button>
             </div>
             <div class="container" style="background-color:#f1f1f1">
                 <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
             </div>
         </form>
-        <div class = "container"> 
+        <div class="container"> 
             <button id="signupbutton" onclick="dispRegister()">Register</button>
         </div>
     </div>
@@ -52,19 +50,19 @@
 </div>
 <!-- The Modal -->
 <div id="id02" class="modal">
-	<span onclick="document.getElementById('id02').style.display='none'" class="close" title="Close Modal">&times;</span>
+	<span onclick="document.getElementById('id02').style.display='none'" class="close" title="Close Modal">×</span>
 	<!-- Modal Content -->
-	<form id = "register" class="modal-content animate" action="action_page.php">
+	<form id="register" class="modal-content animate" action="action_page.php">
 		<div class="imgcontainer">
 			<img src="imgs/avatar.svg" alt="Avatar" class="avatar">
 		</div>
 		<div class="container">
 			<label><b>Username</b></label>
-			<input id = "usernameinput" type="text" placeholder="Enter Username" name="username" required>
+			<input id="usernameinput" type="text" placeholder="Enter Username" name="username" required="">
 			<label><b>Email</b></label>
-			<input id = "emailinput" type="text" placeholder="Enter Email" name="email" required>
+			<input id="emailinput" type="text" placeholder="Enter Email" name="email" required="">
 			<label><b>Password</b></label>
-			<input id = "passwordinput" type="password" placeholder="Enter Password" name="password" required>
+			<input id="passwordinput" type="password" placeholder="Enter Password" name="password" required="">
 			<button type="button" onclick="register()">Register</button>
 		</div>
 		<div class="container" style="background-color:#f1f1f1">
@@ -74,7 +72,7 @@
 </div>
 <div id="container">
 	<header>
-	<img src="imgs/logo.png"/>
+	<img src="imgs/logo.png">
 	<ul>
 		<li><a href="index.html">Home</a></li>
 		<li><a href="premium.html">Premium</a></li>
@@ -91,7 +89,7 @@
 		<div id="uploadbutton">
 			<div>
 				<span class="buttontext">UPLOAD</span>
-				<img src="imgs/uploadicon.png"/>
+				<img src="imgs/uploadicon.png">
 			</div>
 		</div>
 		</a>
@@ -101,5 +99,5 @@
 	<footer>
 	A Lehigh Hacks project by Ryan Cole, Tyler Sudol, Ken Grenestedt, and another person </footer>
 </div>
-</body>
-</html>
+
+</body></html>

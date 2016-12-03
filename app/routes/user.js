@@ -16,7 +16,7 @@ exports.createUser = function (req, res) {
             console.log("error creating new user: " + err);
             res.send("Error creating new user");
         } else {
-            console.log("POST creating new user: " + user._id);
+            console.log("POST creating new user: " + user.name);
             res.json(user);
         }
     });
