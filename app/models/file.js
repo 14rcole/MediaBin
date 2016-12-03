@@ -4,10 +4,9 @@
 var mongoose = require('mongoose');
 
 // define our file schema
-var fileSchema = new Schema({
-    _id: Schema.Types.ObjectId,
+var fileSchema = new mongoose.Schema({
+    ref_count: Number,
     type: String, // music, video, etc
-    quality: String,
     size: Number, // size in number of bytes
     loc: String
 });
@@ -15,6 +14,14 @@ var fileSchema = new Schema({
 fileSchema.methods.addLoc = function(loc) {
     this.loc = loc;
     return this.loc;
+}
+
+fileSchema.methods.incrementRefCount = function() {
+    this.ref_count = this.ref_count+1;
+}
+
+fileSchema.methods.decrementRefCounti = function() {
+    this.ref_count = this.ref_count-1;
 }
 
 mongoose.model('File', fileSchema);
