@@ -17,8 +17,17 @@ app.use(bodyParser.json({ type: 'application/vnd.api+json' })); // parse applica
 app.use(methodOverride('X-HTTP-Method-Override')); // override with the X-HTTP-Method-Override header in the request
 
 
+// models =====================================================================
+var user = require('./app/models/user');
+var file = require('./app/models/file');
+
 // routes ======================================================================
-require('./app/routes.js')(app);
+var userRoutes = require('./app/routes/user');
+//var fileRoutes = require('./app/routes/file');
+
+// register routes ============================================================
+//app.use('/user', userRoutes);
+//app.use('/file', fileRoutes);
 
 // listen (start app with node server.js) ======================================
 app.listen(port);

@@ -4,8 +4,8 @@
 var mongoose = require('mongoose');
 
 // define our file schema
-var fileSchema = new Schema({
-    _id: Schema.Types.ObjectId,
+var fileSchema = new mongoose.Schema({
+    _id: mongoose.Schema.Types.ObjectId,
     type: String, // music, video, etc
     quality: String,
     size: Number, // size in number of bytes
