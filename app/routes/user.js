@@ -16,7 +16,7 @@ exports.createUser = function (req, res) {
             console.log("error creating new user: " + err);
             res.send("Error creating new user");
         } else {
-            console.log("POST creating new user: " + user.name);
+            console.log("POST creating new user: " + user._id);
             res.json(user);
         }
     });
@@ -30,7 +30,7 @@ exports.getUser =  function (req, res) {
             res.send("Error retrieving user");
         } else {
             if (user) {
-                console.log("GET user with ID: " + user.id);
+                console.log("GET user with ID: " + user._id);
                 res.json(user);
             } else {
                 console.log("NO USER");
