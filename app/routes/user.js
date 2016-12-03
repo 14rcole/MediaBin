@@ -29,7 +29,7 @@ exports.getUser =  function (req, res) {
             console.log("Error retrieving user: " + err);
             res.send("Error retrieving user");
         } else {
-            console.log("GET user with ID: " + user._id);
+            console.log("GET user with ID: " + user.id);
             res.json(user);
         }
     });
