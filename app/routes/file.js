@@ -22,7 +22,7 @@ exports.postFile = function (req, res) {
             var options = {
                 args: ['--dbase fpdbase', '-- min-count 100', filename]
             }
-            python.run('app.audfprint/audfprint.py match', options, function (err, results) {
+            python.run('./app/audfprint/audfprint.py match', options, function (err, results) {
                 if (err) {
                     console.log("error matching fingerprint in database " + error);
                     res.send("error matching fingerprint in database");
