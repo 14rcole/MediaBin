@@ -10,7 +10,7 @@ var User = mongoose.model('User');
 // POST
 exports.postFile = function (req, res) {
     if (!req.file) {
-        console.log("error receiving file");
+        console.log("error receiving file" + req);
     } else {
         var options = {
             args: ['--dbase fpdbase', '-- min-count 100', req.file.path]
