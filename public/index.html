@@ -1,50 +1,103 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-	<title>MediaBin</title>
-
-	<!--[if lt IE 9]>
+<title>MediaBin</title>
+<!--[if lt IE 9]>
 		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
-	
-	<link href="css/style.css" rel="stylesheet" type="text/css" />
-    <link href="css/index.css" rel="stylesheet" type="text/css" />
+<script>
+    // Get the modal
+    var modal = document.getElementById('id01');
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+    </script>
+    <script>
+        function dispRegister() {
+	       document.getElementById('id01').style.display='none';
+            document.getElementById('id02').style.display='block';
+        }
+    </script>
+<link href="css/style.css" rel="stylesheet" type="text/css"/>
+<link href="css/index.css" rel="stylesheet" type="text/css"/>
 </head>
-
 <body>
-    <div id = "container">
-        <header>
-            <img src = "imgs/logo.png" />
-            <ul>
-                <li><a href = "index.html">Home</a></li>
-                <li><a href = "premium.html">Premium</a></li>
-                <li><a href = "faq.html">FAQ</a></li>
-                <li><a href = "login.html">Login</a></li>
-            </ul>
-        </header>
-        
-        <div id = "cloudsplash">
-            <h1>Easier Song and Music Storage</h1>
-            <a href = "upload.html">
-                <div id = "uploadbutton">
-                    <div>
-                        <span class = "buttontext">UPLOAD</span>
-                        <img src = "imgs/uploadicon.png" />
-                    </div>
-                </div>
-            </a>
-            <h2>
-                Try us now for free to store up to 20 movies and 500 songs
-            </h2>
+<!-- The Modal -->
+<div id="id01" class="modal">
+	<span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+	<!-- Modal Content -->
+	<form class="modal-content animate" action="action_page.php">
+		<div class="imgcontainer">
+			<img src="imgs/avatar.svg" alt="Avatar" class="avatar">
+		</div>
+		<div class="container">
+			<label><b>Username</b></label>
+			<input type="text" placeholder="Enter Username" name="uname" required>
+			<label><b>Password</b></label>
+			<input type="password" placeholder="Enter Password" name="psw" required>
+			<button type="submit">Login</button>
+		</div>
+		<div class="container" style="background-color:#f1f1f1">
+			<button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+		</div>
+        <div class = "container"> 
+            <button id="signupbutton" onclick="dispRegister()">Register</button>
         </div>
-        
-        <footer>
-            A Lehigh Hacks project by Ryan Cole, Tyler Sudol, Ken Grenestedt, and another person
-        </footer>
-    
-    </div>
-
-
+	</form>
+</div>
+<!-- The Modal -->
+<div id="id02" class="modal">
+	<span onclick="document.getElementById('id02').style.display='none'" class="close" title="Close Modal">&times;</span>
+	<!-- Modal Content -->
+	<form class="modal-content animate" action="action_page.php">
+		<div class="imgcontainer">
+			<img src="imgs/avatar.svg" alt="Avatar" class="avatar">
+		</div>
+		<div class="container">
+			<label><b>Username</b></label>
+			<input type="text" placeholder="Enter Username" name="uname" required>
+			<label><b>Email</b></label>
+			<input type="text" placeholder="Enter Email" name="email" required>
+			<label><b>Password</b></label>
+			<input type="password" placeholder="Enter Password" name="psw" required>
+			<button type="submit">Register</button>
+		</div>
+		<div class="container" style="background-color:#f1f1f1">
+			<button type="button" onclick="document.getElementById('id02').style.display='none'" class="cancelbtn">Cancel</button>
+		</div>
+	</form>
+</div>
+<div id="container">
+	<header>
+	<img src="imgs/logo.png"/>
+	<ul>
+		<li><a href="index.html">Home</a></li>
+		<li><a href="premium.html">Premium</a></li>
+		<li><a href="faq.html">FAQ</a></li>
+		<li>
+		<!-- Button to open the modal login form -->
+		<button id="loginbutton" onclick="document.getElementById('id01').style.display='block'">Login</button>
+		</li>
+	</ul>
+	</header>
+	<div id="cloudsplash">
+		<h1>Easier Song and Music Storage</h1>
+		<a href="upload.html">
+		<div id="uploadbutton">
+			<div>
+				<span class="buttontext">UPLOAD</span>
+				<img src="imgs/uploadicon.png"/>
+			</div>
+		</div>
+		</a>
+		<h2>
+		Try us now for free to store up to 20 movies and 500 songs </h2>
+	</div>
+	<footer>
+	A Lehigh Hacks project by Ryan Cole, Tyler Sudol, Ken Grenestedt, and another person </footer>
+</div>
 </body>
-
 </html>
