@@ -2,49 +2,69 @@ var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
 var python = require('python-shell');
+var multer = require('multer');
+var fs = require('fs-extra');
 var File = mongoose.model('File');
 var User = mongoose.model('User');
 
 // POST
-router.post('/file/upload', function (req, res) {
-    // TODO: add fingerprint to database
-
-    // TODO: Save file to server
-    
-    // generate File object
-    File.create({
-        ref_count: 1,
-        type: req.body.type,
-        size: req.body.size,
-        loc: ""
-    }. function (err, file) {
-        if (err) {
-            console.log("error creating new file: " + err);
-            res.send("error creating new file");
-        } else {
-            console.log("POST adding new file " + file._id);
-            res.send(file);
+exports.postFile = function (req, res) {
+    if (!req.files.fingerprint || !req.files.video) {
+        console.log("error receiving one or more files");
+        res.send("error receiving one or more files");
+    } else {
+        var fingerprintJson = req.files.fingerprint;
+        var options = {
+            args: ['--dbase fpdbase', fingerprintJson.path]
         }
-    });
-});
+        python.run('audfprint.py add', options, function (err, results) {
+            if (err) {
+                console.log("error adding fingerprint to database: " + err);
+                res.send("error adding fingerprint to database");
+            } else {
+                // generate File object
+                var mediaJson = req.files.mediaFile;    
+                File.create({
+                    ref_count: 1,
+                    type: req.body.type,
+                    size: req.body.size,
+                    loc: mediaJson.path
+                }, function (err, file) {
+                    if (err) {
+                        console.log("error creating new file: " + err);
+                        res.send("error creating new file");
+                    } else {
+                        console.log("POST adding new file " + file._id);
+                        res.send(file);
+                    }
+                });         
+            }
+        });
+    } 
+};
 
 
 // GET
-router.get('/file/fprintmatch', function (req, res) {
+exports.matchFprint = function (req, res) {
     // check if the file is in the database
     var options = {
-        args: ['--dbase fpdbase', '-- min-count 100', req.files]
+        args: ['--dbase fpdbase', '-- min-count 100', req.file.filename]
     }
     python.run('audfprint.py match', options, function (err, results) {
         if (err) {
             console.log("error matching fingerprint in database " + error);
             res.send("error matching fingerprint in database");
         } else {
-            if (/* TODO: no match */) {
+            if (results.includes("NOMATCH")) {
                 console.log("no matching fingerprint in database");
                 res.send("NOMATCH");
             } else {
-                match_id = 12345; // TODO: make it get the actual match id from the output
+                var start_index = results.indexOf("Matched ") + 8;
+                var  end_index = start_index + results.substring(start_index).indexOf(" ");
+                var matchFile = results.substring(start_index, end_index);
+                start_index = matchFile.indexOf("/") + 1;
+                end_index = matchFile.lastIndexOf(".");
+                match_id = matchFile.substring(start_index, end_index);
                 File.findById(match_id, function (err, file) {
                     if (err) {
                         console.log("could not find matching json: " + err);
@@ -58,9 +78,9 @@ router.get('/file/fprintmatch', function (req, res) {
             }
         }
     });
-});
+};
 
-router.get('/file/:uid/:filename', function (req, res) {
+exports.getFile = function (req, res) {
     User.findById(req.params.uid, function (err, user) {
         if (err) {
             console.log("Error finding user: " + err);
@@ -83,9 +103,9 @@ router.get('/file/:uid/:filename', function (req, res) {
             }
         }
     });
-});
+};
 
-router.get('/file/download/:uid/:fileid', function (req, res) {
+exports.downloadFile = function (req, res) {
     User.findById(req.params.uid, function (err, user) {
         if (err) {
             console.log("Error finding user: " + err);
@@ -97,14 +117,14 @@ router.get('/file/download/:uid/:fileid', function (req, res) {
                 res.send("Could not find file with that id for the given user");
             } else {
                 console.log("GET file " + file._id);
-                // TODO: download the file
+                res.sendFile(file.loc);
             }
         }
     });
-});
+};
 
 // DELETE
-router.delete('/file/delete/:uid/:fileid', function (req, res) {
+exports.deleteFile = function (req, res) {
     User.findById(req.params.uid, function (err, user) {
         if (err) {
             console.log("Error finding user: " + err);
@@ -123,16 +143,32 @@ router.delete('/file/delete/:uid/:fileid', function (req, res) {
                     } else {
                         file.decrememntRef(req.params.fileid);
                         if (file.ref_count <= 0) {
-                            // TODO: Delete <file._id> from fingerprint database
-                            loc = file.loc;
-                            // TODO: Delete <loc> from storage
-                            File.remove(file, function (err, result) {
+                            var filename = file._id + '.afpt';
+                            var options = {
+                                args: ['--dbase fpdbase', filename]
+                            }
+                            python.run('audfprint.py remove', options, function (err, results) {
                                 if (err) {
-                                    console.log("could not remove file from database: " + err);
-                                    res.send("could not remove file from database");
+                                    console.log("error removing fingerprint from database: " + err);
+                                    res.send("error removing fingerprint from database");
                                 } else {
-                                    console.log("DELETE file from database with id: " + fileid);
-                                    res.send("DELETE file from database");
+                                    loc = file.loc;
+                                    fs.remove(loc, function(err) {
+                                        if (err) {
+                                            console.log("error deleting file from server:" + err);
+                                            res.send("error deleting filefrom server");
+                                        } else {
+                                            File.remove(file, function (err, result) {
+                                                if (err) {
+                                                    console.log("could not remove file from database: " + err);
+                                                    res.send("could not remove file from database");
+                                                } else {
+                                                    console.log("DELETE file from database with id: " + fileid);
+                                                    res.send("DELETE file from database");
+                                                }
+                                            });
+                                        }
+                                    });
                                 }
                             });
                         } else {
@@ -144,4 +180,4 @@ router.delete('/file/delete/:uid/:fileid', function (req, res) {
             }
         }
     });
-});
+};
