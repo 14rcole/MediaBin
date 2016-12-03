@@ -57,7 +57,12 @@ exports.postFile = function (req, res) {
                                             } else {
 
                                                 console.log("POST adding new file " + file._id);
-                                                res.send(file);
+                                                userFile = {
+                                                    file_id: file._id,
+                                                    date: mongoose.Date.now,
+                                                    name: basename
+                                                }
+                                                res.json(userFile);
                                             }
                                         });         
                                     }
@@ -84,6 +89,11 @@ exports.postFile = function (req, res) {
                         });
                         console.log("Found a match! " + result);
                         res.send("MATCH");
+                        userFile = {
+                            file_id: match_id,
+                            date: mongoose.Date.now,
+                            name: basename
+                        }
                     }
                 }
             });
