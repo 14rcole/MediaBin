@@ -1,0 +1,119 @@
+#sidebar {
+    -webkit-box-shadow: inset 0 7px 5px -2px rgba(0, 0, 0, .84);
+    -moz-box-shadow: inset 0 7px 5px -2px rgba(0, 0, 0, .84);
+    box-shadow: inset 0 7px 5px -2px rgba(0, 0, 0, .84);
+    width: 200px;
+    background-color: #D3D3D3;
+    height: 800px;
+}
+
+h2 {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+#content {
+    display: flex;
+}
+
+#binnav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60px;
+    width: 184px;
+    margin: auto;
+    border-bottom: 2px solid #B0AEAE;
+}
+
+#sidebar ul {
+    margin-top: 5px;
+    width: 60%;
+    margin: auto;
+    font-size: 18px;
+}
+
+#sidebar li {
+    padding-top: 3px;
+}
+
+#sidebar li img {
+    position:relative;
+    top: 6px;
+    padding-right: 5px;
+    height: 28px;
+    width: 30px;
+}
+
+#files {
+    width: 800px;
+    background-color: white;
+    -webkit-box-shadow: inset 0 7px 5px -2px rgba(0, 0, 0, .84);
+    -moz-box-shadow: inset 0 7px 5px -2px rgba(0, 0, 0, .84);
+    box-shadow: inset 0 7px 5px -2px rgba(0, 0, 0, .84);
+    width: 
+}
+
+#fileheader {
+    height: 60px;
+    width: 784px;
+    border-bottom: 2px solid #B0AEAE;
+    margin: auto;
+    display: flex;
+    align-items: center;
+}
+
+#fileheader h2 {
+    padding-right: 165px;
+}
+
+#fileheader img {
+    height: 32px;
+    padding: 0px 5px;
+    float: right;
+    
+}
+
+input[type=text] {
+    width: 300px;
+    box-sizing: border-box;
+    border: 2px solid #B0AEAE;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: white;
+    background-image: url('../imgs/fileexplorer/search.svg');
+    background-position:4px 4px; 
+    background-repeat: no-repeat;
+    background-size: 26px;
+    padding: 8px 20px 8px 35px;
+}
+
+.fileentry {
+    border-bottom: 1px solid #B0AEAE;
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    width: 780px;
+    margin: auto;
+    height: 28px;
+}
+
+.fileentry ul {
+    display: flex;
+}
+
+.name {
+    width: 440px;
+}
+
+.quality {
+    width: 100px;
+}
+
+.date {
+    width: 140px;
+}
+
+.size {
+    width: 100px;
+}

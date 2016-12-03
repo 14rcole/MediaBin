@@ -1,0 +1,37 @@
+#cloudsplash {
+    -webkit-box-shadow: inset 0 7px 5px -2px rgba(0, 0, 0, .84);
+    -moz-box-shadow: inset 0 7px 5px -2px rgba(0, 0, 0, .84);
+    box-shadow: inset 0 7px 5px -2px rgba(0, 0, 0, .84);
+    background-image: url(../imgs/cloudsplash72ppi.jpg);
+    height: 667px;
+}
+
+h1 {
+    font-size: 36pt;
+    font-weight: bold;
+    text-align: center;
+    padding-top: 120px;
+    width: 400px;
+    margin: auto;
+}
+
+#uploadbutton {
+    background-image: url(../imgs/button.png);
+    background-repeat: no-repeat;
+    width: 257px;
+    margin: auto;
+    margin-top: 30px;
+    height: 60px;
+    display: flex;
+    font-size: 30pt;
+    align-items: center;
+    justify-content: center;
+}
+
+h2 {
+    padding-top: 120px;
+    width: 400px;
+    font-size: 30px;
+    text-align: center;
+    margin: auto;
+}
