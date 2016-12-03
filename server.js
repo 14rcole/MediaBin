@@ -16,6 +16,7 @@ app.all('/', function (req, res, next) {
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-Within, Content-Type, Accept");
 });
 
+app.use(bodyParser({ limit: 5gb }));
 app.use(express.static(__dirname + '/public')); // set the static files location /public/img will be /img for users
 app.use(bodyParser.urlencoded({'extended':'true'})); // parse application/x-www-form-urlencoded
 app.use(bodyParser.json()); // parse application/json
